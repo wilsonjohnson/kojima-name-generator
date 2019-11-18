@@ -1,5 +1,8 @@
 <h1>Kojima Name Generator</h1>
-<name-form [answers]="cache$ | async"></name-form>
+<div>
+  <name-form [answers]="cache$ | async" class="{{ state$ | async }}"></name-form>
+  <div #collaspe_button *ngIf="state$ | async; let state" class="{{ state }}-button" (click)="change_state(state, collaspe_button)"></div>
+</div>
 <div>
   <div>Lickable? <input #lickable_input type="checkbox" [ngModel]="lickable" (change)="save_lickable(lickable_input)"/></div>
   <button (click)="generate()">Re Roll</button>

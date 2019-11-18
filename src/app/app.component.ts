@@ -1,14 +1,17 @@
 import { Component } from '@angular/core';
 import { LocalStorageService } from './service/local-storage.service';
-import { ANSWERS, LICKABLE, GENERATED } from './globals';
+import { ANSWERS, LICKABLE, GENERATED, STATE } from './globals';
 import { Observable, OperatorFunction } from 'rxjs';
-import { map } from 'rxjs/operators';
+import { map, take } from 'rxjs/operators';
 import { Answers } from './types/answers';
+import { offset } from './functions/offset';
+
+type State = 'collapsed' | 'open';
 
 @Component({
   selector: 'my-app',
   templateUrl: './app.component.html',
-  styleUrls: [ './app.component.css' ]
+  styleUrls: [ './app.component.scss' ]
 })
 export class AppComponent  {
   name = 'Angular';
@@ -17,6 +20,7 @@ export class AppComponent  {
   public questions = {};
   public cache$: Observable<Answers>;
   public lickable: boolean;
+  public state$: Observable<State>;
   constructor(
     private local_storage: LocalStorageService
   ) {
@@ -35,6 +39,15 @@ export class AppComponent  {
 
     this.cache$.subscribe( answers => {
       this.answers = answers;
+    });
+
+    this.state$ = this.local_storage.lookup(STATE).pipe(
+      parse<State>()
+    );
+
+    this.state$.pipe(take(1)).subscribe( state => {
+      if( state ) return;
+      this.local_storage.set(STATE,JSON.stringify('open'));
     });
 
     this.local_storage.lookup(LICKABLE).pipe( parse<boolean>() ).subscribe( lickable => {
@@ -58,6 +71,16 @@ export class AppComponent  {
 
   public save_lickable(input: HTMLInputElement) {
     this.local_storage.set(LICKABLE, JSON.stringify(input.checked));
+  }
+
+  public change_state(state: State, collapse_button: HTMLDivElement){
+    if ( state === 'open' ) this.local_storage.set(STATE,JSON.stringify('collapsed'));
+    if ( state === 'collapsed' ) this.local_storage.set(STATE,JSON.stringify('open'));
+    setTimeout( () => {
+      const {left, top} = offset( collapse_button );
+      console.log( left, top );
+      window.scrollTo( { left, top, behavior: 'smooth' });
+    }, 0 );
   }
 }
 
