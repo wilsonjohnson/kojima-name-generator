@@ -83,7 +83,7 @@ function getSection4(): Modifier {
 		return mod;
 	}
 	if (roll(4) === 4) {
-		mod.suffix = 'Man';
+		mod.suffix = 'man';
 	}
 	let result = roll(8);
 	if (result === 6) {
@@ -104,7 +104,7 @@ function make_prefix(prefix) {
 }
 
 function make_suffix(suffix) {
-    return suffix?` ${suffix}`:''
+    return suffix?`${suffix}`:''
 }
 
 function lookup( section, number ) {
