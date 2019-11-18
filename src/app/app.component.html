@@ -1,0 +1,9 @@
+<h1>Kojima Name Generator</h1>
+<name-form [answers]="cache$ | async"></name-form>
+<div>
+  <div>Lickable? <input #lickable_input type="checkbox" [ngModel]="lickable" (change)="save_lickable(lickable_input)"/></div>
+  <button (click)="generate()">Re Roll</button>
+  <div *ngFor="let name of names$ | async">
+    {{name}}
+  </div>
+</div>

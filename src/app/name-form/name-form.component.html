@@ -1,0 +1,81 @@
+<form [formGroup]="group">
+  <div formGroupName="2"><h1>Section 2:</h1>
+    <label>1. What is your full name?
+      <input type="text"  formControlName="1"/>
+    </label>
+    <label>2. What do you do at your occupation?
+      <input type="text"  formControlName="2"/>
+    </label>
+    <label>2a. Condense the verb in your answer into a single -er noun. (e.g. if youare a sheep farmer, your answer will be “farmer”)
+      <input type="text"  formControlName="2a"/>
+    </label>
+    <label>3. What was your first pet’s specific species/breed? If you never had a pet,please answer with an animal you wish you owned.
+      <input type="text"  formControlName="3"/>
+    </label>
+    <label>4. What’s your most embarrassing childhood memory? Be specific.
+      <input type="text"  formControlName="4"/>
+    </label>
+    <label>4a. Condense this story into two words.
+      <input type="text"  formControlName="4a"/>
+    </label>
+    <label>5. What is the object you’d least like to be stabbed by?
+      <input type="text"  formControlName="5"/>
+    </label>
+    <label>6. What is something you are good at? (Verb ending in -ing)
+      <input type="text"  formControlName="6"/>
+    </label>
+    <label>7. How many carrots do you believe you could eat in one sitting, if someone,like, forced you to eat as many carrots as possible?
+      <input type="text"  formControlName="7"/>
+    </label>
+    <label>8. What is your greatest intangible fear? (e.g. death, loneliness, fear itself)
+      <input type="text"  formControlName="8"/>
+    </label>
+    <label>9. What is your greatest tangible fear? (e.g. horses)
+      <input type="text"  formControlName="9"/>
+    </label>
+    <label>10. What is the last thing you did before starting this worksheet?
+      <input type="text"  formControlName="10"/>
+    </label>
+    <label>11. What condition is your body currently in? (single word answer)
+      <input type="text"  formControlName="11"/>
+    </label>
+    <label>12. Favorite state of matter?
+      <select type="text"  formControlName="12" [value]="group.value['2']['12']">
+        <option *ngFor="let state of states">{{state}}</option>
+      </select>
+    </label>
+    <label>13. A word your name kind of sounds like? (e.g. Brian -> Brain)
+      <input type="text"  formControlName="13"/>
+    </label>
+    <label>14. What is your Zodiac sign?
+      <input type="text"  formControlName="14"/>
+    </label>
+    <label>15. If you had to define your personality in one word, what would it be?
+      <input type="text"  formControlName="15"/>
+    </label>
+  </div>
+  <div formGroupName="3"><h1>Section 3:</h1>
+    <label>16. Who is your favorite film character? (NOTE: must be played by Kurt Russell)
+      <input type="text"  formControlName="16"/>
+    </label>
+    <label>17. What is the last word of the title of your favorite Kubrick film?
+      <input type="text"  formControlName="17"/>
+    </label>
+    <label>18. What is the first word in the title of your favorite Joy Division album?
+      <input type="text"  formControlName="18"/>
+    </label>
+    <label>19. What is a scientific term you picked up from listening to NPR once?
+      <input type="text"  formControlName="19"/>
+    </label>
+    <label>20. What is a piece of military hardware you think looks cool even though war is bad?
+      <input type="text"  formControlName="20"/>
+    </label>
+    <label>21. What is something you’d enjoy watching Mads Mikkelsen do?
+      <input type="text"  formControlName="21"/>
+    </label>
+    <label>21a. Please condense into one word.
+      <input type="text"  formControlName="21a"/>
+    </label>
+  </div>
+  <button *ngIf="value.observers.length" (click)="submit()">submit</button>
+</form>
